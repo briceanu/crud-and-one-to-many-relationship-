@@ -1,0 +1,23 @@
+python3 -m venv one_venv
+source ./one_venv/bin/activate
+pip install "fastapi[standard]"
+pip install pydantic sqlalchemy
+
+uvicorn main:app --reload
+
+
+
+
+=============alembic ==============
+
+alembic init alembic
+
+sqlalchemy.url = sqlite:///one_to_many.db -> in alembic.ini
+
+from database.db_connection import Base    -> alembic/env.py
+target_metadata = Base.metadata            -> alembic/env.py
+
+
+alembic revision --autogenerate -m "Initial migration"
+
+alembic upgrate head
